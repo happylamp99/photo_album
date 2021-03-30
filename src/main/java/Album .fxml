@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Album">
+   <children>
+      <Label layoutX="26.0" layoutY="77.0" text="ID" />
+      <Label layoutX="20.0" layoutY="152.0" text="Name" />
+      <Label layoutX="20.0" layoutY="224.0" text="Category" />
+      <Button layoutX="10.0" layoutY="342.0" mnemonicParsing="false" text="Clear" />
+      <Button layoutX="226.0" layoutY="342.0" mnemonicParsing="false" text="Insert" />
+      <Button layoutX="454.0" layoutY="342.0" mnemonicParsing="false" text="Choose Image" />
+      <TextField layoutX="91.0" layoutY="73.0" />
+      <TextField layoutX="91.0" layoutY="148.0" />
+      <TextField layoutX="91.0" layoutY="220.0" />
+      <ImageView fitHeight="247.0" fitWidth="280.0" layoutX="306.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
