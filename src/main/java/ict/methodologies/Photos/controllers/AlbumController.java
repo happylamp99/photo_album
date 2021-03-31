@@ -1,5 +1,6 @@
 package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
+import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,12 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import java.io.*;
-import javafx.stage.FileChooser;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+
+import java.nio.file.*;
 
 
 public class AlbumController {
@@ -25,15 +24,12 @@ public class AlbumController {
     @FXML
     private TextField textField1;
 
-    @FXML
-    private TextField textField2;
+    String imagePath;
+    String location = "src/main/resources/images/";
 
-    @FXML
-    private TextField textField3;
-
-
-
-    String location = "src/main/resources/images/pic.png";
+    private Path to;
+    private Path from;
+    private File file;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
@@ -43,25 +39,40 @@ public class AlbumController {
                 FileChooser chooser = new FileChooser();
                 chooser.setTitle("Select Image File");
                 chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-                File file = chooser.showOpenDialog(null);
-                Image image1 = new Image(file.toURI().toString());
+
+                file = chooser.showOpenDialog(null);
+                imagePath= file.toURI().toString();
+
+                Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
+                openShowImagesWindow();
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
+
                 break;
 
             case("Insert"):
-
-
+                if (file != null) {
+                    from = Paths.get(file.toURI());
+                    to = Paths.get(location + file.getName());
+                    Files.copy(from, to);
+                }
+                break;
 
             case("Clear"):
                 textField1.setText(" ");
-                textField2.setText(" ");
-                textField3.setText(" ");
-
-
                 break;
 
+        }
+    }
+    public void openShowImagesWindow(){
+        try{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/ShowImages.fxml"));
+            Parent root = loader.load();
 
+            PhotosApplication.getShowImagesStage().setScene(new Scene(root));
+            PhotosApplication.getShowImagesStage().show();
+        }catch(IOException ex){
+            System.out.println(ex);
         }
     }
 }
