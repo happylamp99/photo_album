@@ -1,4 +1,5 @@
 package ict.methodologies.Photos.controllers;
+import ict.methodologies.Photos.Editor.PhotoRotation;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,10 +27,10 @@ public class AlbumController {
 
         switch(buttonText){
             case("Choose Image"):
-                    InputStream stream = new FileInputStream("E:/Tzekos/IdeaProjects/photo_album/images/pc1.jpg");
+                    InputStream stream = new FileInputStream("src/main/resources/images/pic.png");
                     Image image = new Image(stream);
                     imageView.setImage(image);
-
+                    PhotoRotation.rotate("src/main/resources/images/pic.png",90);
                 break;
 
             case("Clear"):
