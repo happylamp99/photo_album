@@ -9,7 +9,7 @@
    <children>
       <Button layoutX="22.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&lt;&lt;" />
       <Button layoutX="497.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&gt;&gt;" />
-      <ImageView fitHeight="301.0" fitWidth="390.0" layoutX="92.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="301.0" fitWidth="390.0" layoutX="92.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
       <TextField layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
