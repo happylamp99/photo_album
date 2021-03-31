@@ -1,6 +1,9 @@
 package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +24,14 @@ public class AlbumController {
 
     @FXML
     private TextField textField1;
+
+    @FXML
+    private TextField textField2;
+
+    @FXML
+    private TextField textField3;
+
+
 
     String location = "src/main/resources/images/pic.png";
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
@@ -44,7 +55,12 @@ public class AlbumController {
 
             case("Clear"):
                 textField1.setText(" ");
+                textField2.setText(" ");
+                textField3.setText(" ");
+
+
                 break;
+
 
         }
     }
