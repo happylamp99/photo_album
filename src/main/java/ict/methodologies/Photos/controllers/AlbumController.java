@@ -24,6 +24,12 @@ public class AlbumController {
     @FXML
     private TextField textField1;
 
+    @FXML
+    private TextField textField2;
+
+    @FXML
+    private TextField textField3;
+
     String imagePath;
     String location = "src/main/resources/images/";
 
@@ -60,6 +66,8 @@ public class AlbumController {
 
             case("Clear"):
                 textField1.setText(" ");
+                textField2.setText(" ");
+                textField3.setText(" ");
                 break;
 
         }
