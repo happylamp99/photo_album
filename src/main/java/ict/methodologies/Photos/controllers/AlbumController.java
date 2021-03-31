@@ -1,6 +1,10 @@
 package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
+import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +45,7 @@ public class AlbumController {
 
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
+                openShowImagesWindow();
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
 
                 break;
@@ -57,6 +62,17 @@ public class AlbumController {
                 textField1.setText(" ");
                 break;
 
+        }
+    }
+    public void openShowImagesWindow(){
+        try{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/ShowImages.fxml"));
+            Parent root = loader.load();
+
+            PhotosApplication.getShowImagesStage().setScene(new Scene(root));
+            PhotosApplication.getShowImagesStage().show();
+        }catch(IOException ex){
+            System.out.println(ex);
         }
     }
 }
