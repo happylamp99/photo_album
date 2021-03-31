@@ -16,7 +16,7 @@ public class PhotosApplication extends Application{
 	private static Stage ShowImagesStage=null;
 	@Override
 	public void start(Stage stage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Album.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Menu.fxml"));
 		stage.setTitle("Album");
 		stage.setScene(new Scene(root));
 		stage.show();

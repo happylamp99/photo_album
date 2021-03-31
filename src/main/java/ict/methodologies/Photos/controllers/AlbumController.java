@@ -51,7 +51,6 @@ public class AlbumController {
 
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
-                openShowImagesWindow();
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
 
                 break;
@@ -69,18 +68,19 @@ public class AlbumController {
                 textField2.setText(" ");
                 textField3.setText(" ");
                 break;
+            case("Back"):
+                try{
+                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/Menu.fxml"));
+                    Parent root = loader.load();
+
+                    PhotosApplication.getShowImagesStage().setScene(new Scene(root));
+                    PhotosApplication.getShowImagesStage().show();
+                }catch(IOException ex){
+                    System.out.println(ex);
+
+                }
 
         }
     }
-    public void openShowImagesWindow(){
-        try{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/ShowImages.fxml"));
-            Parent root = loader.load();
 
-            PhotosApplication.getShowImagesStage().setScene(new Scene(root));
-            PhotosApplication.getShowImagesStage().show();
-        }catch(IOException ex){
-            System.out.println(ex);
-        }
-    }
 }
