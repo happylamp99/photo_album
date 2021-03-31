@@ -2,11 +2,11 @@ package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,17 +21,24 @@ public class AlbumController {
     @FXML
     private TextField textField1;
 
-    public void onMouseClick(MouseEvent mouseEvent) throws FileNotFoundException {
+    String location = "E:/Tzekos/IdeaProjects/photo_album/savedImages";
+    public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
 
         switch(buttonText){
             case("Choose Image"):
-                    InputStream stream = new FileInputStream("src/main/resources/images/pic.png");
-                    Image image = new Image(stream);
-                    imageView.setImage(image);
-                    PhotoRotation.rotate("src/main/resources/images/pic.png",90);
+                FileChooser chooser = new FileChooser();
+                chooser.setTitle("Select Image File");
+                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+                File file = chooser.showOpenDialog(null);
+                Image image1 = new Image(file.toURI().toString());
+                imageView.setImage(image1);
                 break;
+
+            case("Insert"):
+
+
 
             case("Clear"):
                 textField1.setText(" ");
