@@ -6,12 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import java.io.*;
-import javafx.stage.FileChooser;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+
+import java.nio.file.*;
 
 
 public class AlbumController {
@@ -22,7 +20,12 @@ public class AlbumController {
     @FXML
     private TextField textField1;
 
-    String location = "src/main/resources/images/pic.png";
+    String imagePath;
+    String location = "src/main/resources/images/";
+
+    private Path to;
+    private Path from;
+    private File file;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
@@ -32,15 +35,23 @@ public class AlbumController {
                 FileChooser chooser = new FileChooser();
                 chooser.setTitle("Select Image File");
                 chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-                File file = chooser.showOpenDialog(null);
-                Image image1 = new Image(file.toURI().toString());
+
+                file = chooser.showOpenDialog(null);
+                imagePath= file.toURI().toString();
+
+                Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
+
                 break;
 
             case("Insert"):
-
-
+                if (file != null) {
+                    from = Paths.get(file.toURI());
+                    to = Paths.get(location + file.getName());
+                    Files.copy(from, to);
+                }
+                break;
 
             case("Clear"):
                 textField1.setText(" ");
