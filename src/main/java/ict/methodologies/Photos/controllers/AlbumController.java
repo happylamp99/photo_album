@@ -1,11 +1,12 @@
 package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import java.io.*;
 import javafx.stage.FileChooser;
 
 import java.io.FileInputStream;
@@ -21,7 +22,7 @@ public class AlbumController {
     @FXML
     private TextField textField1;
 
-    String location = "E:/Tzekos/IdeaProjects/photo_album/savedImages";
+    String location = "src/main/resources/images/pic.png";
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
@@ -34,6 +35,7 @@ public class AlbumController {
                 File file = chooser.showOpenDialog(null);
                 Image image1 = new Image(file.toURI().toString());
                 imageView.setImage(image1);
+// Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
                 break;
 
             case("Insert"):

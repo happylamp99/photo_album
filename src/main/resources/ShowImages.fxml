@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="511.0" prefWidth="600.0" style="-fx-background-color: #0000FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane prefHeight="511.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
       <Button layoutX="22.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&lt;&lt;" />
       <Button layoutX="497.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&gt;&gt;" />
