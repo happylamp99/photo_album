@@ -3,17 +3,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="511.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane prefHeight="511.0" prefWidth="600.0" style="-fx-background-color: #0000FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
       <Button layoutX="22.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&lt;&lt;" />
       <Button layoutX="497.0" layoutY="38.0" mnemonicParsing="false" prefHeight="301.0" prefWidth="52.0" text="&gt;&gt;" />
       <ImageView fitHeight="301.0" fitWidth="390.0" layoutX="92.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField layoutX="18.0" layoutY="381.0" prefHeight="25.0" prefWidth="69.0" />
-      <TextField layoutX="114.0" layoutY="381.0" prefHeight="25.0" prefWidth="120.0" />
-      <TextField layoutX="256.0" layoutY="381.0" prefHeight="25.0" prefWidth="120.0" />
-      <Button layoutX="406.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Clear" />
-      <Button layoutX="493.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Delete" />
+      <TextField layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TextField layoutX="230.0" layoutY="381.0" prefHeight="25.0" prefWidth="130.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TextField layoutX="427.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Button layoutX="14.0" layoutY="438.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="102.0" text="Clear">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="244.0" layoutY="438.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Delete">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="446.0" layoutY="438.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
