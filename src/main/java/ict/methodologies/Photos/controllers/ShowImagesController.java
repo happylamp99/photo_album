@@ -58,5 +58,23 @@ public class ShowImagesController {
     }
 }
 
-
-
+//import com.drew.imaging.ImageMetadataReader;
+//import com.drew.imaging.ImageProcessingException;
+//import com.drew.metadata.exif.GpsDescriptor;
+//import com.drew.metadata.exif.GpsDirectory;
+//import com.drew.metadata.Directory;
+//    @FXML
+//    private ImageView imageView2;
+//    File jpegFile = new File("src/main/resources/images/pic.png");
+//    Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
+//    for (Directory directory : metadata.getDirectories()) {
+//        for (Tag tag : directory.getTags()) {
+//            System.out.format("[%s] - %s = %s",
+//                    directory.getName(), tag.getTagName(), tag.getDescription());
+//        }
+//        if (directory.hasErrors()) {
+//            for (String error : directory.getErrors()) {
+//                System.err.format("ERROR: %s", error);
+//            }
+//        }
+//    }
