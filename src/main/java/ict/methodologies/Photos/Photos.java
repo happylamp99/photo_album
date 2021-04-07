@@ -5,18 +5,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="imagestable")
-public class Image implements Serializable{
+public class Photos implements Serializable{
+
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "imageID",unique = true)
+    @Column(name = "imageid",unique = true)
     private int id;
 
-    @Column(name = "ImageName", nullable = false)
+    @Column(name = "image_name", nullable = false)
     private String iName;
 
-    @Column(name = "ImageCategory", nullable = false)
+    @Column(name = "image_category", nullable = false)
     private String iCategory;
+
+    @Column(name= "imageurl",nullable = false)
+    private String iURL;
 
     public int getId() {
         return id;
@@ -40,5 +44,13 @@ public class Image implements Serializable{
 
     public void setiCategory(String iCategory) {
         this.iCategory = iCategory;
+    }
+
+    public String getiURL() {
+        return iURL;
+    }
+
+    public void setiURL(String iURL) {
+        this.iURL = iURL;
     }
 }

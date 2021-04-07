@@ -1,5 +1,6 @@
 package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.Editor.PhotoRotation;
+import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
+import ict.methodologies.Photos.ImageManager;
 import java.io.*;
 
 import java.nio.file.*;
+import java.util.Random;
 
 
 public class AlbumController {
@@ -22,51 +25,48 @@ public class AlbumController {
     private ImageView imageView;
 
     @FXML
-    private TextField textField1;
+    private TextField textFieldID;
 
     @FXML
-    private TextField textField2;
+    private TextField textFieldName;
 
     @FXML
-    private TextField textField3;
+    private TextField textFieldCategory;
 
     String imagePath;
-    String location = "src/main/resources/images/";
-
-    private Path to;
-    private Path from;
     private File file;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
-
+        ImageManager imageManager = null;
         switch(buttonText){
-            case("Choose Image"):
+            case("Choose Photos"):
                 FileChooser chooser = new FileChooser();
-                chooser.setTitle("Select Image File");
-                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+                chooser.setTitle("Select Photos File");
+                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Photos Files", "*.png", "*.jpg", "*.jpeg"));
 
                 file = chooser.showOpenDialog(null);
                 imagePath= file.toURI().toString();
 
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
+                Random random = new Random();
+                textFieldID.setText(random.toString());
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
 
                 break;
 
             case("Insert"):
-                if (file != null) {
-                    from = Paths.get(file.toURI());
-                    to = Paths.get(location + file.getName());
-                    Files.copy(from, to);
+            {
+                    imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),imagePath );
+                    imageManager.getImages();
                 }
                 break;
 
             case("Clear"):
-                textField1.setText(" ");
-                textField2.setText(" ");
-                textField3.setText(" ");
+                textFieldID.setText(" ");
+                textFieldName.setText(" ");
+                textFieldCategory.setText(" ");
                 break;
             case("Back"):
                 try{

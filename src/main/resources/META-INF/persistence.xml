@@ -8,16 +8,18 @@
     <persistence-unit name="photo_album" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>ict.methodologies.Photos.Image</class>
+        <class>ict.methodologies.Photos.Photos</class>
         <properties>
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/images"/>
+                      value="jdbc:mysql://localhost:3306/photos"/>
             <property name="javax.persistence.jdbc.user"
                       value="root"/>
             <property name="javax.persistence.jdbc.password"
-                      value="1234"/>
+                      value="rootpw"/>
+            <property name="hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true" />
         </properties>
 
     </persistence-unit>

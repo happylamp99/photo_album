@@ -1,7 +1,7 @@
 package ict.methodologies.Photos.controllers;
 
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
+import ict.methodologies.Photos.Photos;
+import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import com.drew.metadata.*;
-import com.drew.metadata.Directory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
+import static ict.methodologies.Photos.ImageManager.getImages;
 
 
 public class ShowImagesController {
@@ -28,6 +29,10 @@ public class ShowImagesController {
     @FXML
     private TextField textField3;
 
+    private ImageView imageView2;
+    public void ShowImagesController(){
+
+    }
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
@@ -53,6 +58,14 @@ public class ShowImagesController {
                     break;
 
 
+                }
+            case ("Refresh"):
+                try{
+                    ImageManager imageManager;
+                     List<Photos> = imageManager.getImages();
+                    Photos.forEach(Photos -> imageView2.setImage(new Image(photos.getiURL())));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
         }
     }

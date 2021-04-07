@@ -8,24 +8,24 @@ public class ImageManager {
             .createEntityManagerFactory("photo_album");
 
     public static void main(String[] args) {
-        addImage(2, "Image", "Category");
-
+        addImage(1, "Photos", "Category","/home/ToolOS/Downloads/874711.png");
+        getImages();
         ENTITY_MANAGER_FACTORY.close();
     }
 
-    public static void addImage(int id, String name, String category) {
+    public static void addImage(int id, String name, String category,String filepath) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
         try {
             et = em.getTransaction();
             et.begin();
 
-            Image image = new Image();
-            image.setId(id);
-            image.setiName(name);
-            image.setiCategory(category);
-
-            em.persist(image);
+            Photos photos = new Photos();
+            photos.setId(id);
+            photos.setiName(name);
+            photos.setiCategory(category);
+            photos.setiURL(filepath);
+            em.persist(photos);
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -41,12 +41,12 @@ public class ImageManager {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT i FROM Images i WHERE i.id = :imageID";
 
-        TypedQuery<Image> tq = em.createQuery(query, Image.class);
-        tq.setParameter("imageID", id);
-        Image image = null;
+        TypedQuery<Photos> tq = em.createQuery(query, Photos.class);
+        tq.setParameter("imageid", id);
+        Photos photos = null;
         try {
-            image = tq.getSingleResult();
-            System.out.println(image.getiName() + " " + image.getiCategory());
+            photos = tq.getSingleResult();
+            System.out.println(photos.getiName() + " " + photos.getiCategory()+" "+ photos.getiURL());
         } catch (NoResultException ex) {
             System.out.println("ex");
         } finally {
@@ -55,33 +55,36 @@ public class ImageManager {
         }
     }
 
-    public static void getImages(int id) {
+    public static List<Photos> getImages() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT i FROM Images i where i.id IS NOT NULL";
-        TypedQuery<Image> tq = em.createQuery(strQuery, Image.class);
-        List<Image> images;
+        String strQuery = "SELECT i FROM Photos i where i.id IS NOT NULL";
+        TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
+        List<Photos> photos;
+        photos = null;
         try {
-            images = tq.getResultList();
-            images.forEach(image -> System.out.println(image.getiName() + " " + image.getiCategory()));
+            photos = tq.getResultList();
+            photos.forEach(photos -> System.out.println(photos.getiName() + " " + photos.getiCategory()+" "+ photos.getiURL()));
+            return photos;
         } catch (NoResultException ex) {
             System.out.println("ex");
         } finally {
             em.close();
         }
+        return photos;
     }
 
     public static void changeIName(int id, String name) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
-        Image image = null;
+        Photos photos = null;
         try {
             et = em.getTransaction();
             et.begin();
 
-            image = em.find(Image.class, id);
-            image.setiName(name);
+            photos = em.find(Photos.class, id);
+            photos.setiName(name);
 
-            em.persist(image);
+            em.persist(photos);
             et.commit();
 
         } catch (Exception ex) {
@@ -97,14 +100,12 @@ public class ImageManager {
     public static void deleteImage(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
-        Image image = null;
+        Photos photos = null;
         try {
             et = em.getTransaction();
             et.begin();
-            image = em.find(Image.class, id);
-            em.remove(image);
-
-            em.persist(image);
+            photos = em.find(Photos.class, id);
+            em.remove(photos);
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
