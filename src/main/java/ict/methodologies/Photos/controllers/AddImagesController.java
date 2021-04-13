@@ -57,10 +57,10 @@ public class AddImagesController {
                 break;
 
             case("Insert"):
-            {
-                    imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),imagePath );
-                    imageManager.getImages();
-                }
+
+                imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),imagePath );
+                imageManager.getImages();
+
                 break;
 
             case("Clear"):
