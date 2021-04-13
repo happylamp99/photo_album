@@ -1,8 +1,6 @@
 package ict.methodologies.Photos.controllers;
 
 import ict.methodologies.Photos.PhotosApplication;
-import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,9 +15,9 @@ public class MenuController {
         String buttonText = button.getText();
 
         switch (buttonText) {
-            case ("Edit Photos"):
+            case ("Add Photos"):
                 try{
-                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/Album.fxml"));
+                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/AddImages.fxml"));
                     Parent root = loader.load();
 
                     PhotosApplication.getShowImagesStage().setScene(new Scene(root));

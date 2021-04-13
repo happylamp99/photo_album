@@ -1,4 +1,4 @@
-package ict.methodologies.Photos.Editor;
+/*package ict.methodologies.Photos.Editor;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -32,3 +32,4 @@ public class PhotoRotation {
     }
 
 }
+*/

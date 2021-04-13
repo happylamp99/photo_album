@@ -36,13 +36,6 @@ public class ShowImagesController {
 
 
         switch (buttonText) {
-            case("Clear"):
-                textFieldID.setText(" ");
-                textFieldName.setText(" ");
-                textFieldCatergory.setText(" ");
-                break;
-
-
             case ("Back"):
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"));

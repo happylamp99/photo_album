@@ -5,11 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="511.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane prefHeight="511.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
-      <Button layoutX="22.0" layoutY="295.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="&lt;&lt;" />
-      <Button layoutX="497.0" layoutY="295.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" text="&gt;&gt;" />
-      <ImageView fx:id="imageView2" fitHeight="301.0" fitWidth="390.0" layoutX="92.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="316.0" fitWidth="567.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="textFieldID" layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
@@ -22,7 +20,7 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="Clear" layoutX="14.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="102.0" text="Clear">
+      <Button fx:id="Refresh" layoutX="14.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="102.0" text="Refresh">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -35,6 +33,5 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="refreshbtn" layoutX="526.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="Refresh" />
    </children>
 </AnchorPane>
