@@ -34,6 +34,9 @@ public class AddImagesController {
     private TextField textFieldCategory;
 
     String imagePath;
+    String location = "src/main/resources/images/";
+    private Path to;
+    private Path from;
     private File file;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
@@ -57,9 +60,12 @@ public class AddImagesController {
                 break;
 
             case("Insert"):
-
-                imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),imagePath );
-                imageManager.getImages();
+                if (file != null) {
+                    from = Paths.get(file.toURI());
+                    to = Paths.get(location + file.getName());
+                    Files.copy(from, to);
+                }
+                imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),location + file.getName() );
 
                 break;
 

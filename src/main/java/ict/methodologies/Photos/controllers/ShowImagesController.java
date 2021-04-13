@@ -1,5 +1,6 @@
 package ict.methodologies.Photos.controllers;
 
+
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ public class ShowImagesController {
     private TextField textFieldName;
 
     @FXML
-    private TextField textFieldCatergory;
+    private TextField textFieldCategory;
 
     @FXML
     private ImageView imageView2;
@@ -53,12 +54,12 @@ public class ShowImagesController {
 
                 int id = Integer.parseInt(textFieldID.getText());
                 ImageManager.getImage(id);
-                String url = ImageManager.getImageURL();
+                String url = "file:"+ImageManager.getImageURL();
                 Image image1 = new Image(url);
 
 
                 textFieldName.setText(ImageManager.getImageName());
-                textFieldCatergory.setText(ImageManager.getImageCategory());
+                textFieldCategory.setText(ImageManager.getImageCategory());
                 imageView2.setImage(image1);
                 break;
             case ("Delete"):
@@ -66,7 +67,7 @@ public class ShowImagesController {
                 ImageManager.deleteImage(id);
                 textFieldID.setText(" ");
                 textFieldName.setText(" ");
-                textFieldCatergory.setText(" ");
+                textFieldCategory.setText(" ");
                 imageView2.setImage(null);
         }
     }
