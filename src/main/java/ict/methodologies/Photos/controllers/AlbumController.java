@@ -38,12 +38,12 @@ public class AlbumController {
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
-        ImageManager imageManager = null;
+        ImageManager imageManager = new ImageManager();
         switch(buttonText){
-            case("Choose Photos"):
+            case("Choose Image"):
                 FileChooser chooser = new FileChooser();
-                chooser.setTitle("Select Photos File");
-                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Photos Files", "*.png", "*.jpg", "*.jpeg"));
+                chooser.setTitle("Select Image File");
+                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
                 file = chooser.showOpenDialog(null);
                 imagePath= file.toURI().toString();
@@ -51,7 +51,7 @@ public class AlbumController {
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
                 Random random = new Random();
-                textFieldID.setText(random.toString());
+                textFieldID.setText(String.valueOf(random.nextInt(1000)));
 // Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
 
                 break;

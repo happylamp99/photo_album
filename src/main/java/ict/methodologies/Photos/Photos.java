@@ -19,7 +19,7 @@ public class Photos implements Serializable{
     @Column(name = "image_category", nullable = false)
     private String iCategory;
 
-    @Column(name= "imageurl",nullable = false)
+    @Column(name= "url",nullable = false)
     private String iURL;
 
     public int getId() {

@@ -1,6 +1,5 @@
 package ict.methodologies.Photos.controllers;
 
-import ict.methodologies.Photos.Photos;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
@@ -14,21 +13,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
-import java.util.List;
-
-import static ict.methodologies.Photos.ImageManager.getImages;
 
 
 public class ShowImagesController {
     @FXML
-    private TextField textField1;
+    private TextField textFieldID;
 
     @FXML
-    private TextField textField2;
+    private TextField textFieldName;
 
     @FXML
-    private TextField textField3;
+    private TextField textFieldCatergory;
 
+    @FXML
     private ImageView imageView2;
     public void ShowImagesController(){
 
@@ -40,9 +37,9 @@ public class ShowImagesController {
 
         switch (buttonText) {
             case("Clear"):
-                textField1.setText(" ");
-                textField2.setText(" ");
-                textField3.setText(" ");
+                textFieldID.setText(" ");
+                textFieldName.setText(" ");
+                textFieldCatergory.setText(" ");
                 break;
 
 
@@ -60,13 +57,24 @@ public class ShowImagesController {
 
                 }
             case ("Refresh"):
-                try{
-                    ImageManager imageManager;
-                     List<Photos> = imageManager.getImages();
-                    Photos.forEach(Photos -> imageView2.setImage(new Image(photos.getiURL())));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+                int id = Integer.parseInt(textFieldID.getText());
+                ImageManager.getImage(id);
+                String url = ImageManager.getImageURL();
+                Image image1 = new Image(url);
+
+
+                textFieldName.setText(ImageManager.getImageName());
+                textFieldCatergory.setText(ImageManager.getImageCategory());
+                imageView2.setImage(image1);
+                break;
+            case ("Delete"):
+                id = Integer.parseInt(textFieldID.getText());
+                ImageManager.deleteImage(id);
+                textFieldID.setText(" ");
+                textFieldName.setText(" ");
+                textFieldCatergory.setText(" ");
+                imageView2.setImage(null);
         }
     }
 }
