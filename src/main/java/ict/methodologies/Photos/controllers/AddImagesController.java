@@ -1,5 +1,5 @@
 package ict.methodologies.Photos.controllers;
-import ict.methodologies.Photos.Editor.PhotoRotation;
+//import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.nio.file.*;
 import java.util.Random;
 
 
-public class AlbumController {
+public class AddImagesController {
 
     @FXML
     private ImageView imageView;
