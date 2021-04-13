@@ -1,5 +1,7 @@
 package ict.methodologies.Photos;
 
+import com.drew.metadata.StringValue;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class ImageManager {
 
         TypedQuery<Photos> tq = em.createQuery(query, Photos.class);
         tq.setParameter("imageid", id);
-        Photos photos = null;
+        Photos photos;
         try {
             photos = tq.getSingleResult();
             System.out.println(photos.getiName() + " " + photos.getiCategory());
@@ -74,11 +76,15 @@ public class ImageManager {
 
     public static List<Photos> getImages() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT i FROM Photos i where i.id IS NOT NULL";
+        String strQuery = "SELECT i FROM Photos i";
         TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
         List<Photos> photos;
 
             photos = tq.getResultList();
+            for (Photos row:photos){
+                System.out.println(String.valueOf(row.getId())+" " +row.getiName()+ " " +row.getiURL());
+            }
+        System.out.println(photos);
             return photos;
     }
 

@@ -51,12 +51,12 @@ public class ShowImagesController {
 
                 }
             case ("Refresh"):
+                ImageManager.getImages();
 
                 int id = Integer.parseInt(textFieldID.getText());
                 ImageManager.getImage(id);
                 String url = "file:"+ImageManager.getImageURL();
                 Image image1 = new Image(url);
-
 
                 textFieldName.setText(ImageManager.getImageName());
                 textFieldCategory.setText(ImageManager.getImageCategory());
