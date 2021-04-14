@@ -29,8 +29,17 @@ public class ImageManager {
         return imageCategory;
     }
 
+    private static Double imageLong;
+    public static Double getImageLong(){
+        return imageLong;
+    }
 
-    public static void addImage(int id, String name, String category,String url) {
+    private static Double imageLat;
+    public static Double getImageLat(){
+        return imageLat;
+    }
+
+    public static void addImage(int id, String name, String category,String url,Double longt, Double lat) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
         try {
@@ -41,6 +50,8 @@ public class ImageManager {
             photos.setiName(name);
             photos.setiCategory(category);
             photos.setiURL(url);
+            photos.setiLong(longt);
+            photos.setiLat(lat);
             em.persist(photos);
             et.commit();
         } catch (Exception ex) {
@@ -65,7 +76,10 @@ public class ImageManager {
             System.out.println(photos.getiName() + " " + photos.getiCategory());
             imageURL = photos.getiURL();
             imageName = photos.getiName();
-            imageCategory = photos.getiCategory();        }
+            imageCategory = photos.getiCategory();
+            imageLong=photos.getiLong();
+            imageLat= photos.getiLat();
+        }
         catch (NoResultException ex) {
             System.out.println("ex");
         } finally {
@@ -81,11 +95,11 @@ public class ImageManager {
         List<Photos> photos;
 
             photos = tq.getResultList();
-            for (Photos row:photos){
-                System.out.println(String.valueOf(row.getId())+" " +row.getiName()+ " " +row.getiURL());
-            }
-        System.out.println(photos);
-            return photos;
+//            for (Photos row:photos){
+//             //   System.out.println(String.valueOf(row.getId())+" " +row.getiName()+ " " +row.getiURL());
+//            }
+
+        return photos;
     }
 
     public static void changeIName(int id, String name) {

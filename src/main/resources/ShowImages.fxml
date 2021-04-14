@@ -5,33 +5,44 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="511.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
-      <ImageView fx:id="imageView2" fitHeight="316.0" fitWidth="567.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="textFieldID" layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
+      <ImageView fx:id="imageView2" fitHeight="465.0" fitWidth="592.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="textFieldID" layoutX="3.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="textFieldName" layoutX="230.0" layoutY="381.0" prefHeight="25.0" prefWidth="130.0">
+      <TextField fx:id="textFieldName" layoutX="144.0" layoutY="573.0" prefHeight="25.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="textFieldCatergory" layoutX="427.0" layoutY="381.0" prefHeight="30.0" prefWidth="130.0">
+      <TextField fx:id="textFieldCategory" layoutX="286.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="Refresh" layoutX="14.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="102.0" text="Refresh">
+      <Button fx:id="Refresh" layoutX="17.0" layoutY="609.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="112.0" text="Refresh">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="244.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Delete">
+      <Button layoutX="158.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Delete">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="Back" layoutX="446.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Back">
+      <Button fx:id="Back" layoutX="299.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+
+      <Button layoutX="651.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&gt;&gt;" />
+      <Button layoutX="571.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&lt;&lt;" />
+      <Label layoutX="50.0" layoutY="535.0" text="Label" />
+      <Label layoutX="191.0" layoutY="535.0" text="Label" />
+      <Label layoutX="325.0" layoutY="535.0" text="Label" />
+      <Label layoutX="448.0" layoutY="535.0" text="Longitute" />
+      <Label layoutX="597.0" layoutY="535.0" text="Latitude" />
+      <TextField fx:id="textFieldLong" layoutX="426.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
+      <TextField fx:id="textFieldLat" layoutX="568.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
+      <Button layoutX="428.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="39.0" prefWidth="102.0" text="Rotate 90" />
    </children>
 </AnchorPane>

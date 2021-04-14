@@ -1,7 +1,8 @@
 package ict.methodologies.Photos.controllers;
 
-
+//import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.ImageManager;
+import ict.methodologies.Photos.Photos;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public class ShowImagesController {
@@ -28,12 +30,22 @@ public class ShowImagesController {
 
     @FXML
     private ImageView imageView2;
+
+    @FXML
+    private TextField textFieldLong;
+
+    @FXML
+    private TextField textFieldLat;
+
     public void ShowImagesController(){
 
     }
+    int imgIndex=0;
+    int angle=0;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
+        List<Photos> photos= ImageManager.getImages();
 
 
         switch (buttonText) {
@@ -51,45 +63,48 @@ public class ShowImagesController {
 
                 }
             case ("Refresh"):
-                ImageManager.getImages();
-
-                int id = Integer.parseInt(textFieldID.getText());
-                ImageManager.getImage(id);
-                String url = "file:"+ImageManager.getImageURL();
-                Image image1 = new Image(url);
-
-                textFieldName.setText(ImageManager.getImageName());
-                textFieldCategory.setText(ImageManager.getImageCategory());
+                photos=ImageManager.getImages();
+                imgIndex=0;
+                Image image1 = new Image(photos.get(0).getiURL());
+                textFieldID.setText(String.valueOf(photos.get(0).getId()));
+                textFieldName.setText(photos.get(0).getiName());
+                textFieldCategory.setText(photos.get(0).getiCategory());
+                textFieldLong.setText(String.valueOf(photos.get(0).getiLong()));
+                textFieldLat.setText(String.valueOf(photos.get(0).getiLat()));
                 imageView2.setImage(image1);
                 break;
             case ("Delete"):
-                id = Integer.parseInt(textFieldID.getText());
-                ImageManager.deleteImage(id);
+                ImageManager.deleteImage(photos.get(imgIndex).getId());
                 textFieldID.setText(" ");
                 textFieldName.setText(" ");
                 textFieldCategory.setText(" ");
                 imageView2.setImage(null);
-        }
+                break;
+            case(">>"):
+                imgIndex+=1;
+                image1= new Image(photos.get(imgIndex).getiURL());
+                textFieldID.setText(String.valueOf(photos.get(imgIndex).getId()));
+                textFieldName.setText(photos.get(imgIndex).getiName());
+                textFieldCategory.setText(photos.get(imgIndex).getiCategory());
+                textFieldLong.setText(String.valueOf(photos.get(imgIndex).getiLong()));
+                textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
+                imageView2.setImage(image1);
+                 break;
+            case("<<"):
+                imgIndex -= 1;
+                image1 = new Image(photos.get(imgIndex).getiURL());
+                textFieldID.setText(String.valueOf(photos.get(imgIndex).getId()));
+                textFieldName.setText(photos.get(imgIndex).getiName());
+                textFieldCategory.setText(photos.get(imgIndex).getiCategory());
+                textFieldLong.setText(String.valueOf(photos.get(imgIndex).getiLong()));
+                textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
+                imageView2.setImage(image1);
+                break;
+//            case("Rotate 90"):
+//                angle+=90;
+//                PhotoRotation.rotate(String.valueOf(photos.get(imgIndex).getiURL()),angle);
+//                image1 = new Image(photos.get(imgIndex).getiURL());
+//                imageView2.setImage(image1);
+            }
     }
 }
-
-//import com.drew.imaging.ImageMetadataReader;
-//import com.drew.imaging.ImageProcessingException;
-//import com.drew.metadata.exif.GpsDescriptor;
-//import com.drew.metadata.exif.GpsDirectory;
-//import com.drew.metadata.Directory;
-//    @FXML
-//    private ImageView imageView2;
-//    File jpegFile = new File("src/main/resources/images/pic.png");
-//    Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
-//    for (Directory directory : metadata.getDirectories()) {
-//        for (Tag tag : directory.getTags()) {
-//            System.out.format("[%s] - %s = %s",
-//                    directory.getName(), tag.getTagName(), tag.getDescription());
-//        }
-//        if (directory.hasErrors()) {
-//            for (String error : directory.getErrors()) {
-//                System.err.format("ERROR: %s", error);
-//            }
-//        }
-//    }

@@ -22,6 +22,28 @@ public class Photos implements Serializable{
     @Column(name= "url",nullable = false)
     private String iURL;
 
+    @Column(name= "Longitude")
+    private Double iLong;
+
+    @Column(name= "Latitude")
+    private Double iLat;
+
+    public Double getiLat() {
+        return iLat;
+    }
+
+    public void setiLat(Double iLat) {
+        this.iLat = iLat;
+    }
+
+    public Double getiLong() {
+        return iLong;
+    }
+
+    public void setiLong(Double iLong) {
+        this.iLong = iLong;
+    }
+
     public int getId() {
         return id;
     }

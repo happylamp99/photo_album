@@ -1,5 +1,18 @@
 package ict.methodologies.Photos.controllers;
 //import ict.methodologies.Photos.Editor.PhotoRotation;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegSegmentMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifReader;
+import com.drew.metadata.exif.GpsDirectory;
+import com.drew.metadata.iptc.IptcReader;
+
+import com.drew.lang.GeoLocation;
+import com.drew.lang.Rational;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
@@ -16,6 +29,9 @@ import ict.methodologies.Photos.ImageManager;
 import java.io.*;
 
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Random;
 
 
@@ -34,11 +50,9 @@ public class AddImagesController {
     private TextField textFieldCategory;
 
     String imagePath;
-    String location = "src/main/resources/images/";
-    private Path to;
-    private Path from;
     private File file;
-    public void onMouseClick(MouseEvent mouseEvent) throws IOException {
+    public void onMouseClick(MouseEvent mouseEvent) throws IOException, ImageProcessingException {
+
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
         ImageManager imageManager = new ImageManager();
@@ -54,18 +68,23 @@ public class AddImagesController {
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
                 Random random = new Random();
-                textFieldID.setText(String.valueOf(random.nextInt(1000)));
-// Rotation     PhotoRotation.rotate(file.getAbsolutePath(),angle);
-
+                textFieldID.setText(String.valueOf(random.nextInt()));
                 break;
 
             case("Insert"):
-                if (file != null) {
-                    from = Paths.get(file.toURI());
-                    to = Paths.get(location + file.getName());
-                    Files.copy(from, to);
+                Metadata metadata = ImageMetadataReader.readMetadata(file);
+                Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
+                boolean added = false;
+                for (GpsDirectory gpsDirectory : gpsDirectories) {
+                // Try to read out the location, making sure it's non-zero
+                    GeoLocation geoLocation = gpsDirectory.getGeoLocation();
+                    if (geoLocation != null && !geoLocation.isZero()) {
+                    imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude());
+                    added = true;
+                    }
                 }
-                imageManager.addImage(Integer.parseInt(textFieldID.getText()),textFieldName.getText(),textFieldCategory.getText(),location + file.getName() );
+                if (added !=true)
+                imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null);
 
                 break;
 
@@ -88,5 +107,4 @@ public class AddImagesController {
 
         }
     }
-
 }
