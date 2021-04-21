@@ -1,6 +1,7 @@
-package ict.methodologies.Photos;
+package ict.methodologies.Photos.Models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -27,6 +28,9 @@ public class Photos implements Serializable{
 
     @Column(name= "Latitude")
     private Double iLat;
+
+    @Column (name= "Date")
+    private Date date;
 
     public Double getiLat() {
         return iLat;
@@ -74,5 +78,12 @@ public class Photos implements Serializable{
 
     public void setiURL(String iURL) {
         this.iURL = iURL;
+    }
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

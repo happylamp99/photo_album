@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
-      <ImageView fx:id="imageView2" fitHeight="465.0" fitWidth="592.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="465.0" fitWidth="468.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="textFieldID" layoutX="3.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
@@ -36,13 +36,15 @@
 
       <Button layoutX="651.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&gt;&gt;" />
       <Button layoutX="571.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&lt;&lt;" />
-      <Label layoutX="50.0" layoutY="535.0" text="Label" />
-      <Label layoutX="191.0" layoutY="535.0" text="Label" />
-      <Label layoutX="325.0" layoutY="535.0" text="Label" />
-      <Label layoutX="448.0" layoutY="535.0" text="Longitute" />
-      <Label layoutX="597.0" layoutY="535.0" text="Latitude" />
+      <Label layoutX="61.0" layoutY="543.0" text="ID" />
+      <Label layoutX="190.0" layoutY="543.0" text="Name" />
+      <Label layoutX="321.0" layoutY="543.0" text="Category" />
+      <Label layoutX="460.0" layoutY="543.0" text="Longitute" />
+      <Label layoutX="606.0" layoutY="543.0" text="Latitude" />
       <TextField fx:id="textFieldLong" layoutX="426.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
       <TextField fx:id="textFieldLat" layoutX="568.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
       <Button layoutX="428.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="39.0" prefWidth="102.0" text="Rotate 90" />
+      <TextField fx:id="textFieldDate" layoutX="711.0" layoutY="571.0" prefHeight="30.0" prefWidth="204.0" />
+      <Label layoutX="779.0" layoutY="543.0" text="Date" />
    </children>
 </AnchorPane>

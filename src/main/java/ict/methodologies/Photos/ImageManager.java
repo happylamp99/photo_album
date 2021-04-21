@@ -1,8 +1,9 @@
 package ict.methodologies.Photos;
 
-import com.drew.metadata.StringValue;
+import ict.methodologies.Photos.Models.Photos;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 public class ImageManager {
@@ -39,7 +40,7 @@ public class ImageManager {
         return imageLat;
     }
 
-    public static void addImage(int id, String name, String category,String url,Double longt, Double lat) {
+    public static void addImage(int id, String name, String category, String url, Double longt, Double lat, Date date) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
         try {
@@ -52,6 +53,7 @@ public class ImageManager {
             photos.setiURL(url);
             photos.setiLong(longt);
             photos.setiLat(lat);
+            photos.setDate(date);
             em.persist(photos);
             et.commit();
         } catch (Exception ex) {
@@ -93,12 +95,7 @@ public class ImageManager {
         String strQuery = "SELECT i FROM Photos i";
         TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
         List<Photos> photos;
-
-            photos = tq.getResultList();
-//            for (Photos row:photos){
-//             //   System.out.println(String.valueOf(row.getId())+" " +row.getiName()+ " " +row.getiURL());
-//            }
-
+        photos = tq.getResultList();
         return photos;
     }
 

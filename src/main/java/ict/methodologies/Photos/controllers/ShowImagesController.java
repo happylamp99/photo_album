@@ -2,7 +2,7 @@ package ict.methodologies.Photos.controllers;
 
 //import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.ImageManager;
-import ict.methodologies.Photos.Photos;
+import ict.methodologies.Photos.Models.Photos;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+
 import java.util.List;
 
 
@@ -37,6 +38,9 @@ public class ShowImagesController {
     @FXML
     private TextField textFieldLat;
 
+    @FXML
+    private TextField textFieldDate;
+
     public void ShowImagesController(){
 
     }
@@ -46,8 +50,6 @@ public class ShowImagesController {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
         List<Photos> photos= ImageManager.getImages();
-
-
         switch (buttonText) {
             case ("Back"):
                 try {
@@ -71,6 +73,7 @@ public class ShowImagesController {
                 textFieldCategory.setText(photos.get(0).getiCategory());
                 textFieldLong.setText(String.valueOf(photos.get(0).getiLong()));
                 textFieldLat.setText(String.valueOf(photos.get(0).getiLat()));
+                textFieldDate.setText(String.valueOf(photos.get(0).getDate()));
                 imageView2.setImage(image1);
                 break;
             case ("Delete"):
@@ -88,6 +91,7 @@ public class ShowImagesController {
                 textFieldCategory.setText(photos.get(imgIndex).getiCategory());
                 textFieldLong.setText(String.valueOf(photos.get(imgIndex).getiLong()));
                 textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
+                textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
                  break;
             case("<<"):
@@ -98,6 +102,7 @@ public class ShowImagesController {
                 textFieldCategory.setText(photos.get(imgIndex).getiCategory());
                 textFieldLong.setText(String.valueOf(photos.get(imgIndex).getiLong()));
                 textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
+                textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
                 break;
 //            case("Rotate 90"):

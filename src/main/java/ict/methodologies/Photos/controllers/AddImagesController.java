@@ -8,6 +8,7 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifReader;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.drew.metadata.exif.GpsDirectory;
 import com.drew.metadata.iptc.IptcReader;
 
@@ -29,6 +30,7 @@ import ict.methodologies.Photos.ImageManager;
 import java.io.*;
 
 import java.nio.file.*;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -75,17 +77,21 @@ public class AddImagesController {
                 Metadata metadata = ImageMetadataReader.readMetadata(file);
                 Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
                 boolean added = false;
+                // obtain the Exif directory
+                ExifSubIFDDirectory directory= metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+
+                // query the tag's value
+                Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
                 for (GpsDirectory gpsDirectory : gpsDirectories) {
                 // Try to read out the location, making sure it's non-zero
                     GeoLocation geoLocation = gpsDirectory.getGeoLocation();
                     if (geoLocation != null && !geoLocation.isZero()) {
-                    imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude());
+                    imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude(),date);
                     added = true;
                     }
                 }
                 if (added !=true)
-                imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null);
-
+                imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
                 break;
 
             case("Clear"):
