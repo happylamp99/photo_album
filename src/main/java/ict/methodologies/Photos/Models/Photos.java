@@ -11,6 +11,7 @@ public class Photos implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue
     @Column(name = "imageid",unique = true)
     private int id;
 
@@ -31,6 +32,12 @@ public class Photos implements Serializable{
 
     @Column (name= "Date")
     private Date date;
+
+    @Column (name="Album")
+    private String album;
+
+    @Column (name="People")
+    private String people;
 
     public Double getiLat() {
         return iLat;
@@ -85,5 +92,17 @@ public class Photos implements Serializable{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    public String getAlbum() {
+        return album;
+    }
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+    public String getPeople() {
+        return people;
+    }
+    public void setPeople(String people) {
+        this.people = people;
     }
 }

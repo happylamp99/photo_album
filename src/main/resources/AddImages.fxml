@@ -9,8 +9,8 @@
       <Label layoutX="26.0" layoutY="77.0" text="ID" />
       <Label layoutX="20.0" layoutY="152.0" text="Name" />
       <Label layoutX="20.0" layoutY="224.0" text="Category" />
-      <Button layoutX="10.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Clear" />
-      <Button layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Insert" />
+      <Button fx:id="clearBtn" layoutX="10.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Clear" visible="false" />
+      <Button fx:id="insertBtn" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Insert" visible="false" />
       <Button layoutX="454.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="104.0" text="Choose Image" />
       <TextField fx:id="textFieldID" layoutX="91.0" layoutY="73.0" />
       <TextField fx:id="textFieldName" layoutX="91.0" layoutY="148.0" />

@@ -51,6 +51,12 @@ public class AddImagesController {
     @FXML
     private TextField textFieldCategory;
 
+    @FXML
+    private Button insertBtn;
+
+    @FXML
+    private Button clearBtn;
+
     String imagePath;
     private File file;
     public void onMouseClick(MouseEvent mouseEvent) throws IOException, ImageProcessingException {
@@ -71,6 +77,8 @@ public class AddImagesController {
                 imageView.setImage(image1);
                 Random random = new Random();
                 textFieldID.setText(String.valueOf(random.nextInt()));
+                insertBtn.setVisible(true);
+                clearBtn.setVisible(true);
                 break;
 
             case("Insert"):
@@ -86,12 +94,12 @@ public class AddImagesController {
                 // Try to read out the location, making sure it's non-zero
                     GeoLocation geoLocation = gpsDirectory.getGeoLocation();
                     if (geoLocation != null && !geoLocation.isZero()) {
-                    imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude(),date);
+                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude(),date);
                     added = true;
                     }
                 }
                 if (added !=true)
-                imageManager.addImage(Integer.parseInt(textFieldID.getText()), textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
+                imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
                 break;
 
             case("Clear"):

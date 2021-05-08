@@ -40,14 +40,13 @@ public class ImageManager {
         return imageLat;
     }
 
-    public static void addImage(int id, String name, String category, String url, Double longt, Double lat, Date date) {
+    public static void addImage(String name, String category, String url, Double longt, Double lat, Date date) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
         try {
             et = em.getTransaction();
             et.begin();
             Photos photos = new Photos();
-            photos.setId(id);
             photos.setiName(name);
             photos.setiCategory(category);
             photos.setiURL(url);
