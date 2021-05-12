@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="237.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.MetadataViewerController">
+   <children>
+      <Label layoutX="36.0" layoutY="44.0" text="Image Name" />
+      <Label layoutX="36.0" layoutY="71.0" text="Image Category" />
+      <Label layoutX="36.0" layoutY="102.0" text="Longitude" />
+      <Label layoutX="36.0" layoutY="131.0" text="Latitude" />
+      <Label layoutX="36.0" layoutY="159.0" text="Date" />
+      <TextField fx:id="textFieldName" layoutX="141.0" layoutY="40.0" />
+      <TextField fx:id="textFieldCategory" layoutX="141.0" layoutY="67.0" />
+      <TextField fx:id="textFieldLong" layoutX="141.0" layoutY="98.0" />
+      <TextField fx:id="textFieldLat" layoutX="141.0" layoutY="127.0" />
+      <TextField fx:id="textFieldDate" layoutX="141.0" layoutY="155.0" />
+      <Button fx:id="buttonOK" layoutX="199.0" layoutY="198.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="OK" />
+      <Button layoutX="120.0" layoutY="198.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="View" />
+   </children>
+</AnchorPane>

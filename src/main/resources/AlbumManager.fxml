@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="168.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.AlbumManagerController">
+   <children>
+      <TextField fx:id="albumNameTextField" layoutX="25.0" layoutY="56.0" />
+      <Label layoutX="48.0" layoutY="28.0" text="Insert Album Name" />
+      <Button fx:id="buttonOK" layoutX="83.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="OK" />
+   </children>
+</AnchorPane>

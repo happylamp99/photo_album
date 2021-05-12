@@ -3,6 +3,7 @@ package ict.methodologies.Photos;
 import ict.methodologies.Photos.Models.Photos;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,18 @@ public class ImageManager {
     public static Double getImageLat(){
         return imageLat;
     }
+    private static Date imageDate;
+    public static Date getImageDate(){
+        return imageDate;
+    }
+    private static String imageAlbum;
+    public static String getImageAlbum(){
+        return imageAlbum;
+    }
+    private static String imagePeople;
+    public static String getImagePeople(){
+        return imagePeople;
+    }
 
     public static void addImage(String name, String category, String url, Double longt, Double lat, Date date) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -53,6 +66,7 @@ public class ImageManager {
             photos.setiLong(longt);
             photos.setiLat(lat);
             photos.setDate(date);
+
             em.persist(photos);
             et.commit();
         } catch (Exception ex) {
@@ -75,6 +89,34 @@ public class ImageManager {
         try {
             photos = tq.getSingleResult();
             System.out.println(photos.getiName() + " " + photos.getiCategory());
+            imageURL = photos.getiURL();
+            imageName = photos.getiName();
+            imageCategory = photos.getiCategory();
+            imageLong = photos.getiLong();
+            imageLat = photos.getiLat();
+            imageDate = photos.getDate();
+            imageAlbum = photos.getAlbum();
+            imagePeople = photos.getPeople();
+
+        }
+        catch (NoResultException ex) {
+            System.out.println("ex");
+        } finally {
+            em.close();
+
+        }
+    }
+
+    public static void getAlbum(String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT i FROM Photos i WHERE album = :album";
+
+        TypedQuery<Photos> tq = em.createQuery(query, Photos.class);
+        tq.setParameter("album", album);
+        Photos photos;
+        try {
+
+            photos = tq.getSingleResult();
             imageURL = photos.getiURL();
             imageName = photos.getiName();
             imageCategory = photos.getiCategory();
@@ -121,6 +163,19 @@ public class ImageManager {
             em.close();
         }
     }
+
+    public static void setIAlbum(int id, String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        em.getTransaction().begin();
+        Query query =em.createQuery("UPDATE Photos SET album =:album WHERE imageid =:id") ;
+        query.setParameter("album",album);
+        query.setParameter("id",id);
+        query.executeUpdate();
+        em.getTransaction().commit();
+
+
+    }
+
 
     public static void deleteImage(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();

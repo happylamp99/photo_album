@@ -4,15 +4,18 @@ package ict.methodologies.Photos.controllers;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.Models.Photos;
 import ict.methodologies.Photos.PhotosApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -41,11 +44,73 @@ public class ShowImagesController {
     @FXML
     private TextField textFieldDate;
 
+
+
     public void ShowImagesController(){
+        ContextMenu contextMenu = new ContextMenu();
+        Menu item1 = new Menu("Add to Album");
+        MenuItem sub1 = new MenuItem("New Album");
+        MenuItem sub2 = new MenuItem("Existing Album");
+        item1.getItems().addAll(sub1,sub2);
+        MenuItem item2 = new MenuItem("Show Metadata");
+        MenuItem item3 = new MenuItem("Delete Image");
+
+
+        sub1.setOnAction((ActionEvent e) ->{
+
+            try {
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumManager.fxml"));
+                Parent root = loader.load();
+                AlbumManagerController albumManagerController = loader.getController();
+                albumManagerController.setImageId(Integer.parseInt(textFieldID.getText()));
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setAlwaysOnTop(true);
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        });
+        item2.setOnAction((ActionEvent e) ->{
+            try {
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/MetadataViewer.fxml"));
+                Parent root = loader.load();
+                MetadataViewerController metadataViewerController = loader.getController();
+                metadataViewerController.setImageId(Integer.parseInt(textFieldID.getText()));
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setAlwaysOnTop(true);
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        });
+        item3.setOnAction((ActionEvent e) ->{
+            List<Photos> photos= ImageManager.getImages();
+            ImageManager.deleteImage(photos.get(imgIndex).getId());
+            textFieldID.setText(" ");
+            textFieldName.setText(" ");
+            textFieldCategory.setText(" ");
+            imageView2.setImage(null);
+        });
+        contextMenu.getItems().addAll(item1,item2,item3);
+        imageView2.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent contextMenuEvent) {
+                contextMenu.show(imageView2,contextMenuEvent.getScreenX(), contextMenuEvent.getScreenY());
+            }
+        });
 
     }
     int imgIndex=0;
     int angle=0;
+
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
@@ -93,6 +158,7 @@ public class ShowImagesController {
                 textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
                 textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
+                ShowImagesController();
                  break;
             case("<<"):
                 imgIndex -= 1;
