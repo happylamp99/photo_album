@@ -10,12 +10,13 @@
       <Label layoutX="20.0" layoutY="152.0" text="Name" />
       <Label layoutX="20.0" layoutY="224.0" text="Category" />
       <Button fx:id="clearBtn" layoutX="10.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Clear" visible="false" />
-      <Button fx:id="insertBtn" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Insert" visible="false" />
+      <Button fx:id="insertBtn" layoutX="166.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="86.0" text="Insert" visible="false" />
       <Button layoutX="454.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="104.0" text="Choose Image" />
       <TextField fx:id="textFieldID" layoutX="91.0" layoutY="73.0" />
       <TextField fx:id="textFieldName" layoutX="91.0" layoutY="148.0" />
       <TextField fx:id="textFieldCategory" layoutX="91.0" layoutY="220.0" />
       <ImageView fx:id="imageView" fitHeight="247.0" fitWidth="280.0" layoutX="306.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="Back" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="26.0" prefWidth="104.0" text="Back" />
+      <Button layoutX="335.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="104.0" text="Choose Images" />
    </children>
 </AnchorPane>

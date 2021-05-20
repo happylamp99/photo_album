@@ -45,6 +45,7 @@ public class ShowImagesController {
     private TextField textFieldDate;
 
 
+    String albumName;
 
     public void ShowImagesController(){
         ContextMenu contextMenu = new ContextMenu();
@@ -62,12 +63,14 @@ public class ShowImagesController {
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumManager.fxml"));
                 Parent root = loader.load();
                 AlbumManagerController albumManagerController = loader.getController();
-                albumManagerController.setImageId(Integer.parseInt(textFieldID.getText()));
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                stage.show();
                 stage.setAlwaysOnTop(true);
+                stage.showAndWait();
+
+                albumName = albumManagerController.getAlbumName();
+                ImageManager.setIAlbum(Integer.parseInt(textFieldID.getText()),albumName);
 
             } catch (IOException ioException) {
                 ioException.printStackTrace();
@@ -126,8 +129,6 @@ public class ShowImagesController {
                 } catch (IOException ex) {
                     System.out.println(ex);
                     break;
-
-
                 }
             case ("Refresh"):
                 photos=ImageManager.getImages();

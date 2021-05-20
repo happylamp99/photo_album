@@ -78,6 +78,32 @@ public class ImageManager {
             em.close();
         }
     }
+    public static void addImage(String name, String category, String url, Double longt, Double lat, Date date,String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            Photos photos = new Photos();
+            photos.setiName(name);
+            photos.setiCategory(category);
+            photos.setiURL(url);
+            photos.setiLong(longt);
+            photos.setiLat(lat);
+            photos.setDate(date);
+            photos.setAlbum(album);
+
+            em.persist(photos);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
 
     public static void getImage(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
