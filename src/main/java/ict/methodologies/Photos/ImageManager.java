@@ -133,6 +133,57 @@ public class ImageManager {
         }
     }
 
+    public static List<Photos> getImages() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String strQuery = "SELECT i FROM Photos i";
+        TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
+        List<Photos> photos;
+        photos = tq.getResultList();
+        return photos;
+    }
+
+    public static void setIAlbum(int id, String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        em.getTransaction().begin();
+        Query query =em.createQuery("UPDATE Photos SET album =:album WHERE imageid =:id") ;
+        query.setParameter("album",album);
+        query.setParameter("id",id);
+        query.executeUpdate();
+        em.getTransaction().commit();
+    }
+
+    public static List<Photos> searchImages(String search) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        em.getTransaction().begin();
+        Query query =em.createQuery( "SELECT i.id FROM Photos i WHERE imageid =:search OR image_category =:search OR image_name =:search OR latitude=:search OR longitude=:search OR album=:search OR people=:search ");
+        query.setParameter("search",search);
+        List<Photos> photos;
+        photos = query.getResultList();
+        System.out.println(photos);
+        return  photos;
+
+    }
+
+    public static void deleteImage(int id) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        Photos photos = null;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            photos = em.find(Photos.class, id);
+            em.remove(photos);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
     public static void getAlbum(String album) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT i FROM Photos i WHERE album = :album";
@@ -157,15 +208,6 @@ public class ImageManager {
         }
     }
 
-    public static List<Photos> getImages() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT i FROM Photos i";
-        TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
-        List<Photos> photos;
-        photos = tq.getResultList();
-        return photos;
-    }
-
     public static void changeIName(int id, String name) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
@@ -180,39 +222,6 @@ public class ImageManager {
             em.persist(photos);
             et.commit();
 
-        } catch (Exception ex) {
-            if (et != null) {
-                et.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            em.close();
-        }
-    }
-
-    public static void setIAlbum(int id, String album) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        em.getTransaction().begin();
-        Query query =em.createQuery("UPDATE Photos SET album =:album WHERE imageid =:id") ;
-        query.setParameter("album",album);
-        query.setParameter("id",id);
-        query.executeUpdate();
-        em.getTransaction().commit();
-
-
-    }
-
-
-    public static void deleteImage(int id) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        EntityTransaction et = null;
-        Photos photos = null;
-        try {
-            et = em.getTransaction();
-            et.begin();
-            photos = em.find(Photos.class, id);
-            em.remove(photos);
-            et.commit();
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
       <ImageView fx:id="imageView2" fitHeight="465.0" fitWidth="468.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="textFieldID" layoutX="3.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
@@ -46,5 +46,7 @@
       <Button layoutX="428.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="39.0" prefWidth="102.0" text="Rotate 90" />
       <TextField fx:id="textFieldDate" layoutX="711.0" layoutY="571.0" prefHeight="30.0" prefWidth="204.0" />
       <Label layoutX="779.0" layoutY="543.0" text="Date" />
+      <TextField fx:id="textFieldSearch" layoutX="724.0" layoutY="32.0" />
+      <Button fx:id="buttonSearch" layoutX="889.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="Search" />
    </children>
 </AnchorPane>

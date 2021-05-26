@@ -44,6 +44,8 @@ public class ShowImagesController {
     @FXML
     private TextField textFieldDate;
 
+    @FXML
+    private TextField textFieldSearch;
 
     String albumName;
 
@@ -58,7 +60,6 @@ public class ShowImagesController {
 
 
         sub1.setOnAction((ActionEvent e) ->{
-
             try {
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumManager.fxml"));
                 Parent root = loader.load();
@@ -109,7 +110,6 @@ public class ShowImagesController {
                 contextMenu.show(imageView2,contextMenuEvent.getScreenX(), contextMenuEvent.getScreenY());
             }
         });
-
     }
     int imgIndex=0;
     int angle=0;
@@ -130,6 +130,10 @@ public class ShowImagesController {
                     System.out.println(ex);
                     break;
                 }
+            case("Search"):
+                photos=ImageManager.searchImages(textFieldSearch.getText());
+                System.out.print(photos);
+               break;
             case ("Refresh"):
                 photos=ImageManager.getImages();
                 imgIndex=0;
