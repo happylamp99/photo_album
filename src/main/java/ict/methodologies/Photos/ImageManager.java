@@ -129,7 +129,6 @@ public class ImageManager {
             System.out.println("ex");
         } finally {
             em.close();
-
         }
     }
 
@@ -152,15 +151,15 @@ public class ImageManager {
         em.getTransaction().commit();
     }
 
-    public static List<Photos> searchImages(String search) {
+    public static List<Integer> searchImages(String search) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         em.getTransaction().begin();
         Query query =em.createQuery( "SELECT i.id FROM Photos i WHERE imageid =:search OR image_category =:search OR image_name =:search OR latitude=:search OR longitude=:search OR album=:search OR people=:search ");
         query.setParameter("search",search);
-        List<Photos> photos;
-        photos = query.getResultList();
-        System.out.println(photos);
-        return  photos;
+        List<Integer> searchedIds;
+        searchedIds = query.getResultList();
+        System.out.println(searchedIds);
+        return  searchedIds;
 
     }
 

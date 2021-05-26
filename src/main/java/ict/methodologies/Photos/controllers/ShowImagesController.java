@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,6 +49,9 @@ public class ShowImagesController {
 
     @FXML
     private TextField textFieldSearch;
+
+    @FXML
+    private GridPane gridPane;
 
     String albumName;
 
@@ -104,6 +110,7 @@ public class ShowImagesController {
             imageView2.setImage(null);
         });
         contextMenu.getItems().addAll(item1,item2,item3);
+
         imageView2.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent contextMenuEvent) {
@@ -131,9 +138,33 @@ public class ShowImagesController {
                     break;
                 }
             case("Search"):
-                photos=ImageManager.searchImages(textFieldSearch.getText());
-                System.out.print(photos);
+                List<Integer> ids= ImageManager.searchImages(textFieldSearch.getText());
+                gridPane.getChildren().clear();
+
+                int imageCol = 0;
+                int imageRow = 0;
+
+                for(int i=0;i< photos.size();i++){
+                    System.out.println(photos.get(i));
+                    ImageManager.getImage(ids.get(i));
+                    HBox hb = new HBox(20);
+                    Image image1 = new Image(ImageManager.getImageURL());
+
+                    ImageView imageViewG = new ImageView();
+                    imageViewG.setFitHeight(100);
+                    imageViewG.setFitWidth(100);
+                    imageViewG.setImage(image1);
+                    hb.getChildren().add(imageViewG);
+                    gridPane.add(hb,imageCol,imageRow);
+
+                    imageCol++;
+                    if(imageCol > 4){
+                        imageCol=0;
+                        imageRow++;
+                    }
+                }
                break;
+
             case ("Refresh"):
                 photos=ImageManager.getImages();
                 imgIndex=0;
