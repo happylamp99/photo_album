@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -120,6 +121,27 @@ public class ShowImagesController {
     }
     int imgIndex=0;
     int angle=0;
+    int[][] gridId = new int[16][16];
+
+    public void clickGrid(javafx.scene.input.MouseEvent event) {
+        Node clickedNode = event.getPickResult().getIntersectedNode();
+        if (clickedNode != gridPane) {
+            Node parent = clickedNode.getParent();
+            while (parent != gridPane) {
+                clickedNode = parent;
+                parent = clickedNode.getParent();
+            }
+            Integer colIndex = GridPane.getColumnIndex(clickedNode);
+            Integer rowIndex = GridPane.getRowIndex(clickedNode);
+
+            textFieldID.setText(String.valueOf(gridId[colIndex][rowIndex]));
+            ImageManager.getImage(gridId[colIndex][rowIndex]);
+            Image image = new Image(ImageManager.getImageURL());
+            imageView2.setImage(image);
+            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+        }
+    }
+
 
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
@@ -144,8 +166,9 @@ public class ShowImagesController {
                 int imageCol = 0;
                 int imageRow = 0;
 
-                for(int i=0;i< photos.size();i++){
-                    System.out.println(photos.get(i));
+                for(int i=0;i< ids.size();i++){
+
+                    gridId[imageCol][imageRow] = ids.get(i);
                     ImageManager.getImage(ids.get(i));
                     HBox hb = new HBox(20);
                     Image image1 = new Image(ImageManager.getImageURL());
@@ -212,6 +235,8 @@ public class ShowImagesController {
 //                PhotoRotation.rotate(String.valueOf(photos.get(imgIndex).getiURL()),angle);
 //                image1 = new Image(photos.get(imgIndex).getiURL());
 //                imageView2.setImage(image1);
+
+
             }
     }
 }
