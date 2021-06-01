@@ -78,6 +78,32 @@ public class ImageManager {
             em.close();
         }
     }
+    public static void addImage(String name, String category, String url, Double longt, Double lat, Date date,String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            Photos photos = new Photos();
+            photos.setiName(name);
+            photos.setiCategory(category);
+            photos.setiURL(url);
+            photos.setiLong(longt);
+            photos.setiLat(lat);
+            photos.setDate(date);
+            photos.setAlbum(album);
+
+            em.persist(photos);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
 
     public static void getImage(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -103,7 +129,57 @@ public class ImageManager {
             System.out.println("ex");
         } finally {
             em.close();
+        }
+    }
 
+    public static List<Photos> getImages() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String strQuery = "SELECT i FROM Photos i";
+        TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
+        List<Photos> photos;
+        photos = tq.getResultList();
+        return photos;
+    }
+
+    public static void setIAlbum(int id, String album) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        em.getTransaction().begin();
+        Query query =em.createQuery("UPDATE Photos SET album =:album WHERE imageid =:id") ;
+        query.setParameter("album",album);
+        query.setParameter("id",id);
+        query.executeUpdate();
+        em.getTransaction().commit();
+    }
+
+    public static List<Integer> searchImages(String search) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        em.getTransaction().begin();
+        Query query =em.createQuery( "SELECT i.id FROM Photos i WHERE imageid =:search OR image_category =:search OR image_name =:search OR latitude=:search OR longitude=:search OR album=:search OR people=:search ");
+        query.setParameter("search",search);
+        List<Integer> searchedIds;
+        searchedIds = query.getResultList();
+        System.out.println(searchedIds);
+        return  searchedIds;
+
+    }
+
+    public static void deleteImage(int id) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        Photos photos = null;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            photos = em.find(Photos.class, id);
+            em.remove(photos);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
         }
     }
 
@@ -131,15 +207,6 @@ public class ImageManager {
         }
     }
 
-    public static List<Photos> getImages() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT i FROM Photos i";
-        TypedQuery<Photos> tq = em.createQuery(strQuery, Photos.class);
-        List<Photos> photos;
-        photos = tq.getResultList();
-        return photos;
-    }
-
     public static void changeIName(int id, String name) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
@@ -154,39 +221,6 @@ public class ImageManager {
             em.persist(photos);
             et.commit();
 
-        } catch (Exception ex) {
-            if (et != null) {
-                et.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            em.close();
-        }
-    }
-
-    public static void setIAlbum(int id, String album) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        em.getTransaction().begin();
-        Query query =em.createQuery("UPDATE Photos SET album =:album WHERE imageid =:id") ;
-        query.setParameter("album",album);
-        query.setParameter("id",id);
-        query.executeUpdate();
-        em.getTransaction().commit();
-
-
-    }
-
-
-    public static void deleteImage(int id) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        EntityTransaction et = null;
-        Photos photos = null;
-        try {
-            et = em.getTransaction();
-            et.begin();
-            photos = em.find(Photos.class, id);
-            em.remove(photos);
-            et.commit();
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();

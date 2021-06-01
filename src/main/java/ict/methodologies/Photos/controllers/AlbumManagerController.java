@@ -17,21 +17,19 @@ public class AlbumManagerController {
     @FXML
     private Button buttonOK;
 
-    public void setImageId(int id) {
-        this.imageId = id;
+    public String getAlbumName() {
+        return AlbumName;
     }
-    int imageId;
+    String AlbumName;
 
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
         String buttonText = button.getText();
         switch (buttonText) {
             case ("OK"):
-                ImageManager.setIAlbum(imageId,albumNameTextField.getText());
-                System.out.print(imageId);
+                AlbumName=albumNameTextField.getText();
                 Stage stage = (Stage) buttonOK.getScene().getWindow();
                 stage.close();
-
         }
 
     }

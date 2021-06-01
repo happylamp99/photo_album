@@ -2,18 +2,11 @@ package ict.methodologies.Photos.controllers;
 //import ict.methodologies.Photos.Editor.PhotoRotation;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
-import com.drew.imaging.jpeg.JpegMetadataReader;
-import com.drew.imaging.jpeg.JpegSegmentMetadataReader;
-import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-import com.drew.metadata.exif.ExifReader;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.drew.metadata.exif.GpsDirectory;
-import com.drew.metadata.iptc.IptcReader;
 
 import com.drew.lang.GeoLocation;
-import com.drew.lang.Rational;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.PhotosApplication;
 import javafx.fxml.FXML;
@@ -25,16 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
-import ict.methodologies.Photos.ImageManager;
 import java.io.*;
 
-import java.nio.file.*;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Random;
+import java.util.*;
 
 
 public class AddImagesController {
@@ -59,6 +47,41 @@ public class AddImagesController {
 
     String imagePath;
     private File file;
+    String albumName;
+
+    public static Date MetaDataReaderDate(File file) throws ImageProcessingException, IOException {
+        Metadata metadata = ImageMetadataReader.readMetadata(file);
+        // obtain the Exif directory
+        ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+        // query the tag's value
+        Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+        return date;
+    }
+
+    public static double[] MetaDataReaderGeoLocation(File file) throws ImageProcessingException, IOException {
+        Metadata metadata = ImageMetadataReader.readMetadata(file);
+        Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
+        double[] answer = new double[0];
+        for (GpsDirectory gpsDirectory : gpsDirectories) {
+            // Try to read out the location, making sure it's non-zero
+            GeoLocation geoLocation = gpsDirectory.getGeoLocation();
+
+            if (geoLocation != null && !geoLocation.isZero()) {
+                answer = new double[3];
+                answer[0] = geoLocation.getLatitude();
+                answer[1] = geoLocation.getLongitude();
+                answer[2] = 1;
+            }
+            else {
+                answer = new double[3];
+                answer[0] = 0;
+                answer[1] = 0;
+                answer[2] = 0;
+            }
+        }
+        return answer;
+    }
+
     public void onMouseClick(MouseEvent mouseEvent) throws IOException, ImageProcessingException {
 
         Button button = (Button) mouseEvent.getSource();
@@ -75,31 +98,50 @@ public class AddImagesController {
 
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
-                Random random = new Random();
-                textFieldID.setText(String.valueOf(random.nextInt()));
+                //Random random = new Random();
+                //textFieldID.setText(String.valueOf(random.nextInt()));
                 insertBtn.setVisible(true);
                 clearBtn.setVisible(true);
                 break;
 
-            case("Insert"):
-                Metadata metadata = ImageMetadataReader.readMetadata(file);
-                Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
-                boolean added = false;
-                // obtain the Exif directory
-                ExifSubIFDDirectory directory= metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+            case("Choose Images"):
+                FileChooser chooser1 = new FileChooser();
+                chooser1.setTitle("Select Multiple Image Files");
+                chooser1.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+                List<File> files = chooser1.showOpenMultipleDialog(null);
+                try {
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumManager.fxml"));
+                Parent root = loader.load();
+                AlbumManagerController albumManagerController = loader.getController();
 
-                // query the tag's value
-                Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
-                for (GpsDirectory gpsDirectory : gpsDirectories) {
-                // Try to read out the location, making sure it's non-zero
-                    GeoLocation geoLocation = gpsDirectory.getGeoLocation();
-                    if (geoLocation != null && !geoLocation.isZero()) {
-                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, geoLocation.getLatitude(), geoLocation.getLongitude(),date);
-                    added = true;
-                    }
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setAlwaysOnTop(true);
+                stage.showAndWait();
+
+                albumName = albumManagerController.getAlbumName();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
-                if (added !=true)
-                imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
+
+                for (File file : files) {
+
+                    imagePath= file.toURI().toString();
+                    Date date = MetaDataReaderDate(file);
+                    double[] LanLon = MetaDataReaderGeoLocation(file);
+                    if(LanLon[2] == 1)
+                        imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, LanLon[0], LanLon[1],date,albumName);
+                    else
+                        imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date,albumName);
+                }
+
+            case("Insert"):
+                Date date = MetaDataReaderDate(file);
+                double[] LanLon = MetaDataReaderGeoLocation(file);
+                if(LanLon[2] == 1)
+                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, LanLon[0], LanLon[1], date);
+                else
+                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
                 break;
 
             case("Clear"):
@@ -107,9 +149,10 @@ public class AddImagesController {
                 textFieldName.setText(" ");
                 textFieldCategory.setText(" ");
                 break;
+
             case("Back"):
                 try{
-                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/Menu.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"));
                     Parent root = loader.load();
 
                     PhotosApplication.getShowImagesStage().setScene(new Scene(root));
