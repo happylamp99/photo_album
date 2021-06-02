@@ -32,7 +32,7 @@ public class PhotosApplication extends Application{
 	public void createShowImagesStage(){
 		ShowImagesStage=new Stage();
 		ShowImagesStage.setTitle("Images");
-		ShowImagesStage.setAlwaysOnTop(true);
+		ShowImagesStage.setAlwaysOnTop(false);
 		ShowImagesStage.setResizable(false);
 		ShowImagesStage.initModality(Modality.APPLICATION_MODAL);
 	}
