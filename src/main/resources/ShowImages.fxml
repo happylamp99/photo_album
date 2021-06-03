@@ -8,16 +8,16 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.ShowImagesController">
    <children>
-      <ImageView fx:id="imageView2" fitHeight="465.0" fitWidth="468.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="438.0" fitWidth="415.0" layoutX="17.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="textFieldID" layoutX="3.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="textFieldName" layoutX="144.0" layoutY="573.0" prefHeight="25.0" prefWidth="130.0">
+      <TextField fx:id="textFieldName" layoutX="144.0" layoutY="573.0" prefHeight="25.0" prefWidth="130.0 " visible="false">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="textFieldCategory" layoutX="286.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0">
+      <TextField fx:id="textFieldCategory" layoutX="286.0" layoutY="572.0" prefHeight="30.0" prefWidth="130.0" visible="false">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -25,34 +25,31 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="158.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Delete">
+      <Button layoutX="158.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Delete" visible="false">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="Back" layoutX="299.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Back">
+      <Button fx:id="Back" layoutX="900.0" layoutY="609.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="102.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
 
-      <Button layoutX="651.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&gt;&gt;" />
-      <Button layoutX="571.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="52.0" text="&lt;&lt;" />
+      <Button layoutX="541.0" layoutY="604.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="238.0" text="&gt;&gt;" />
+      <Button layoutX="250.0" layoutY="604.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="54.0" prefWidth="238.0" text="&lt;&lt;" />
       <Label layoutX="61.0" layoutY="543.0" text="ID" />
-      <Label layoutX="190.0" layoutY="543.0" text="Name" />
-      <Label layoutX="321.0" layoutY="543.0" text="Category" />
-      <Label layoutX="460.0" layoutY="543.0" text="Longitute" />
-      <Label layoutX="606.0" layoutY="543.0" text="Latitude" />
-      <TextField fx:id="textFieldLong" layoutX="426.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
-      <TextField fx:id="textFieldLat" layoutX="568.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" />
-      <Button layoutX="441.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="44.0" prefWidth="102.0" text="Rotate 90">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <TextField fx:id="textFieldDate" layoutX="711.0" layoutY="571.0" prefHeight="30.0" prefWidth="204.0" />
-      <Label layoutX="779.0" layoutY="543.0" text="Date" />
+      <Label layoutX="190.0" layoutY="543.0" text="Name" visible="false" />
+      <Label layoutX="321.0" layoutY="543.0" text="Category" visible="false" />
+      <Label layoutX="460.0" layoutY="543.0" text="Longitute" visible="false" />
+      <Label layoutX="606.0" layoutY="543.0" text="Latitude" visible="false" />
+      <TextField fx:id="textFieldLong" layoutX="426.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" visible="false" />
+      <TextField fx:id="textFieldLat" layoutX="568.0" layoutY="571.0" prefHeight="30.0" prefWidth="130.0" visible="false" />
+      <Button layoutX="428.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" prefHeight="39.0" prefWidth="102.0" text="Rotate 90" visible="false" />
+      <TextField fx:id="textFieldDate" layoutX="711.0" layoutY="571.0" prefHeight="30.0" prefWidth="204.0" visible="false" />
+      <Label layoutX="779.0" layoutY="543.0" text="Date" visible="false" />
       <TextField fx:id="textFieldSearch" layoutX="724.0" layoutY="32.0" />
       <Button fx:id="buttonSearch" layoutX="889.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="Search" />
-      <GridPane fx:id="gridPane" hgap="2.0" layoutX="441.0" layoutY="88.0" prefHeight="438.0" prefWidth="599.0" vgap="2.0" AnchorPane.topAnchor="88.0">
+      <GridPane fx:id="gridPane" hgap="2.0" layoutX="480.0" layoutY="88.0" onMouseClicked="#clickGrid" prefHeight="471.0" prefWidth="547.0" vgap="2.0" AnchorPane.topAnchor="88.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
