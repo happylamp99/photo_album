@@ -7,8 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
-import java.awt.*;
 import java.io.IOException;
 
 public class MetadataViewerController {

@@ -2,11 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="168.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.AlbumManagerController">
+<AnchorPane prefHeight="281.0" prefWidth="402.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ict.methodologies.Photos.controllers.AlbumManagerController">
    <children>
-      <TextField fx:id="albumNameTextField" layoutX="25.0" layoutY="56.0" />
-      <Label layoutX="48.0" layoutY="28.0" text="Insert Album Name" />
-      <Button fx:id="buttonOK" layoutX="83.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="OK" />
+      <TextField fx:id="albumNameTextField" layoutX="136.0" layoutY="197.0" />
+      <Label layoutX="12.0" layoutY="201.0" text="Insert Album Name" />
+      <Button fx:id="buttonOK" layoutX="194.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#onMouseClick" text="OK" />
+      <TextField fx:id="categorybox" layoutX="136.0" layoutY="62.0" />
+      <CheckBox fx:id="catck" layoutX="38.0" layoutY="66.0" mnemonicParsing="false" text="Category" />
+      <CheckBox fx:id="peopleck" layoutX="38.0" layoutY="110.0" mnemonicParsing="false" text="People" />
+      <CheckBox fx:id="radck" layoutX="38.0" layoutY="151.0" mnemonicParsing="false" text="Radius" />
+      <TextField fx:id="peoplebox" layoutX="136.0" layoutY="106.0" />
+      <TextField fx:id="radiusbox" layoutX="136.0" layoutY="147.0" />
+      <Label layoutX="14.0" layoutY="45.0" text="Criteria" />
+      <Label layoutX="146.0" layoutY="14.0" text="Album Creation">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

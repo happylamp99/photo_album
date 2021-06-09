@@ -1,5 +1,6 @@
 package ict.methodologies.Photos.controllers;
 
+//import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.Models.Photos;
@@ -9,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -63,6 +65,7 @@ public class ShowImagesController {
         item1.getItems().addAll(sub1,sub2);
         MenuItem item2 = new MenuItem("Show Metadata");
         MenuItem item3 = new MenuItem("Delete Image");
+        MenuItem item4 = new MenuItem("Show GPS location");
 
 
         sub1.setOnAction((ActionEvent e) ->{
@@ -73,7 +76,7 @@ public class ShowImagesController {
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                stage.setAlwaysOnTop(false);
+                stage.setAlwaysOnTop(true);
                 stage.showAndWait();
 
                 albumName = albumManagerController.getAlbumName();
@@ -94,8 +97,6 @@ public class ShowImagesController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-                stage.setAlwaysOnTop(false);
-
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -109,7 +110,20 @@ public class ShowImagesController {
             textFieldCategory.setText(" ");
             imageView2.setImage(null);
         });
-        contextMenu.getItems().addAll(item1,item2,item3);
+        item4.setOnAction((ActionEvent e) -> {
+            try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/GPSlocation.fxml"));
+            loader.setControllerFactory(GPSWebviewController -> new GPSWebviewController(Integer.parseInt(textFieldID.getText())));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        });
+        contextMenu.getItems().addAll(item1,item2,item3,item4);
 
         imageView2.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
@@ -120,6 +134,27 @@ public class ShowImagesController {
     }
     int imgIndex=0;
     int angle=0;
+    int[][] gridId = new int[16][16];
+
+    public void clickGrid(javafx.scene.input.MouseEvent event) {
+        Node clickedNode = event.getPickResult().getIntersectedNode();
+        if (clickedNode != gridPane) {
+            Node parent = clickedNode.getParent();
+            while (parent != gridPane) {
+                clickedNode = parent;
+                parent = clickedNode.getParent();
+            }
+            Integer colIndex = GridPane.getColumnIndex(clickedNode);
+            Integer rowIndex = GridPane.getRowIndex(clickedNode);
+
+            textFieldID.setText(String.valueOf(gridId[colIndex][rowIndex]));
+            ImageManager.getImage(gridId[colIndex][rowIndex]);
+            Image image = new Image(ImageManager.getImageURL());
+            imageView2.setImage(image);
+            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+        }
+    }
+
 
     public void onMouseClick(MouseEvent mouseEvent) throws IOException {
         Button button = (Button) mouseEvent.getSource();
@@ -144,8 +179,9 @@ public class ShowImagesController {
                 int imageCol = 0;
                 int imageRow = 0;
 
-                for(int i=0;i< photos.size();i++){
-                    System.out.println(photos.get(i));
+                for(int i=0;i< ids.size();i++){
+
+                    gridId[imageCol][imageRow] = ids.get(i);
                     ImageManager.getImage(ids.get(i));
                     HBox hb = new HBox(20);
                     Image image1 = new Image(ImageManager.getImageURL());
@@ -176,6 +212,7 @@ public class ShowImagesController {
                 textFieldLat.setText(String.valueOf(photos.get(0).getiLat()));
                 textFieldDate.setText(String.valueOf(photos.get(0).getDate()));
                 imageView2.setImage(image1);
+                ShowImagesController();
                 break;
             case ("Delete"):
                 ImageManager.deleteImage(photos.get(imgIndex).getId());
@@ -206,6 +243,7 @@ public class ShowImagesController {
                 textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
                 textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
+                ShowImagesController();
                 break;
             case("Rotate 90"):
                 angle+=90;
