@@ -97,8 +97,6 @@ public class ShowImagesController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-                stage.setAlwaysOnTop(true);
-
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -118,12 +116,9 @@ public class ShowImagesController {
             Parent root = loader.load();
             GPSWebviewController gpsloc = loader.getController();
             gpsloc.setImageId(Integer.parseInt(textFieldID.getText()));
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-            stage.setAlwaysOnTop(true);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -218,6 +213,7 @@ public class ShowImagesController {
                 textFieldLat.setText(String.valueOf(photos.get(0).getiLat()));
                 textFieldDate.setText(String.valueOf(photos.get(0).getDate()));
                 imageView2.setImage(image1);
+                ShowImagesController();
                 break;
             case ("Delete"):
                 ImageManager.deleteImage(photos.get(imgIndex).getId());
@@ -248,6 +244,7 @@ public class ShowImagesController {
                 textFieldLat.setText(String.valueOf(photos.get(imgIndex).getiLat()));
                 textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
+                ShowImagesController();
                 break;
             case("Rotate 90"):
                 angle+=90;
