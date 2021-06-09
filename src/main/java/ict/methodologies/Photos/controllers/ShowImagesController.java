@@ -113,9 +113,8 @@ public class ShowImagesController {
         item4.setOnAction((ActionEvent e) -> {
             try {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("/GPSlocation.fxml"));
+            loader.setControllerFactory(GPSWebviewController -> new GPSWebviewController(Integer.parseInt(textFieldID.getText())));
             Parent root = loader.load();
-            GPSWebviewController gpsloc = loader.getController();
-            gpsloc.setImageId(Integer.parseInt(textFieldID.getText()));
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

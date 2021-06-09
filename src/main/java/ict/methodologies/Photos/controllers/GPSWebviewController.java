@@ -15,8 +15,9 @@ public class GPSWebviewController {
     @FXML
     private WebView webView;
     int imageId;
-    public void setImageId(int id) {
-        this.imageId = id;
+
+    public GPSWebviewController(int textFieldIDText) {
+        imageId=textFieldIDText;
     }
     @FXML
     private void initialize()
@@ -65,7 +66,6 @@ public class GPSWebviewController {
                     "</script>\n" +
                     "</body>\n" +
                     "</html>";
-        System.out.println(html);
          webView.getEngine().loadContent(html);
     }
 }
