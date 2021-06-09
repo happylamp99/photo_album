@@ -40,6 +40,9 @@ public class AddImagesController {
     private TextField textFieldCategory;
 
     @FXML
+    private TextField textFieldPeople;
+
+    @FXML
     private Button insertBtn;
 
     @FXML
@@ -92,14 +95,10 @@ public class AddImagesController {
                 FileChooser chooser = new FileChooser();
                 chooser.setTitle("Select Image File");
                 chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-
                 file = chooser.showOpenDialog(null);
                 imagePath= file.toURI().toString();
-
                 Image image1 = new Image(imagePath);
                 imageView.setImage(image1);
-                //Random random = new Random();
-                //textFieldID.setText(String.valueOf(random.nextInt()));
                 insertBtn.setVisible(true);
                 clearBtn.setVisible(true);
                 break;
@@ -113,12 +112,9 @@ public class AddImagesController {
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumManager.fxml"));
                 Parent root = loader.load();
                 AlbumManagerController albumManagerController = loader.getController();
-
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                stage.setAlwaysOnTop(true);
                 stage.showAndWait();
-
                 albumName = albumManagerController.getAlbumName();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -139,9 +135,9 @@ public class AddImagesController {
                 Date date = MetaDataReaderDate(file);
                 double[] LanLon = MetaDataReaderGeoLocation(file);
                 if(LanLon[2] == 1)
-                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, LanLon[0], LanLon[1], date);
+                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath, LanLon[0], LanLon[1], date,textFieldPeople.getText());
                 else
-                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date);
+                    imageManager.addImage(textFieldName.getText(), textFieldCategory.getText(), imagePath,null,null,date,textFieldPeople.getText());
                 break;
 
             case("Clear"):

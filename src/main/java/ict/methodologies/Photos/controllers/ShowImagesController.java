@@ -1,6 +1,7 @@
 package ict.methodologies.Photos.controllers;
 
 //import ict.methodologies.Photos.Editor.PhotoRotation;
+import ict.methodologies.Photos.Editor.PhotoRotation;
 import ict.methodologies.Photos.ImageManager;
 import ict.methodologies.Photos.Models.Photos;
 import ict.methodologies.Photos.PhotosApplication;
@@ -64,6 +65,7 @@ public class ShowImagesController {
         item1.getItems().addAll(sub1,sub2);
         MenuItem item2 = new MenuItem("Show Metadata");
         MenuItem item3 = new MenuItem("Delete Image");
+        MenuItem item4 = new MenuItem("Show GPS location");
 
 
         sub1.setOnAction((ActionEvent e) ->{
@@ -110,7 +112,24 @@ public class ShowImagesController {
             textFieldCategory.setText(" ");
             imageView2.setImage(null);
         });
-        contextMenu.getItems().addAll(item1,item2,item3);
+        item4.setOnAction((ActionEvent e) -> {
+            try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/GPSlocation.fxml"));
+            Parent root = loader.load();
+            GPSWebviewController gpsloc = loader.getController();
+            gpsloc.setImageId(Integer.parseInt(textFieldID.getText()));
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            stage.setAlwaysOnTop(true);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        });
+        contextMenu.getItems().addAll(item1,item2,item3,item4);
 
         imageView2.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
@@ -230,11 +249,14 @@ public class ShowImagesController {
                 textFieldDate.setText(String.valueOf(photos.get(imgIndex).getDate()));
                 imageView2.setImage(image1);
                 break;
-//            case("Rotate 90"):
-//                angle+=90;
-//                PhotoRotation.rotate(String.valueOf(photos.get(imgIndex).getiURL()),angle);
-//                image1 = new Image(photos.get(imgIndex).getiURL());
-//                imageView2.setImage(image1);
+            case("Rotate 90"):
+                angle+=90;
+                PhotoRotation rotation = new PhotoRotation();
+                rotation.rotate(photos.get(imgIndex).getiURL(),angle);
+                image1 = new Image(photos.get(imgIndex).getiURL());
+                imageView2.setImage(image1);
+                angle=0;
+                break;
             }
     }
 }
