@@ -49,6 +49,13 @@ public class MenuController {
                     System.out.println(ex);
                 }
                 break;
+            case ("View Albums"):
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/AlbumViewer.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) addPhotosBtn.getScene().getWindow();
+                stage.hide();
+                PhotosApplication.getShowImagesStage().setScene(new Scene(root));
+                PhotosApplication.getShowImagesStage().show();
             case("Exit"):
                 System.exit(0);
                 break;
